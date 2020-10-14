@@ -16,14 +16,15 @@ def main():
             user = input('Digite seu usuario:\n')
             pwd = input('Digite sua senha:\n')
 
-            Login(user,pwd,True)
+            login = Login(user,pwd,True)
+            login.login()
     else:
 
         user = input('Digite seu usuario:\n')
         pwd = input('Digite sua senha:\n')
 
-        Login(user,pwd,True)
-
+        login = Login(user,pwd,True)
+        login.login()
     link = input('Link do perfil para pegar os posts\n')
     
     
