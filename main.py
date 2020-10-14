@@ -2,6 +2,31 @@ from send_photo import Send
 from login import Login
 from web_scraping import BaixarConteudo
 from time import sleep as tm
+import emoji
+
+def conver_unicode(text):
+    palavra_final = ''
+    if text == None:
+
+        return None
+
+    for char in text:
+
+            
+
+        if char in emoji.UNICODE_EMOJI:
+                
+            car = char.encode('unicode-escape').decode('ASCII')
+
+            uni_c = f"u'{car}'"
+
+            
+        else:
+
+            palavra_final = palavra_final+char
+
+    print(palavra_final)
+    return palavra_final
 
 
 def main():
@@ -31,7 +56,9 @@ def main():
     while True:
 
         robot = BaixarConteudo(link)
-        legenda = robot.coletar_informacoes()
+        legenda = conver_unicode(robot.coletar_informacoes())
+        
+
         
         if legenda == None:
 
@@ -44,3 +71,4 @@ def main():
 
 
 main()
+

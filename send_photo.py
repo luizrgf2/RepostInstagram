@@ -3,6 +3,7 @@ import pickle
 import os
 from time import sleep as tm
 from webdriver_manager.chrome import ChromeDriverManager
+import emoji
 
 class Send():
 
@@ -44,7 +45,13 @@ class Send():
         
         tm(3)
         
-        self.driver.execute_script(f'var e = document.getElementsByClassName("_472V_"); e[0].value = "{legenda}"')
+        self.driver.find_element_by_xpath('/html/body/div[1]/section/div[2]/section[1]/div[1]/textarea').click()
+
+        tm(4)
+
+        
+
+        self.driver.find_element_by_xpath('/html/body/div[1]/section/div[2]/section[1]/div[1]/textarea').send_keys(legenda)
         
         tm(3)
         
@@ -53,3 +60,23 @@ class Send():
         tm(10)
         
         self.driver.close()
+
+    def conver_unicode(self,text):
+
+        for char in text:
+
+            
+
+            if char in emoji.UNICODE_EMOJI:
+                
+                car = char.encode('unicode-escape').decode('ASCII')
+
+                uni_c = f"u'{car}'"
+
+                palavra_final = palavra_final+uni_c
+            else:
+
+                palavra_final = palavra_final+char
+
+        print(palavra_final)
+        return palavra_final
