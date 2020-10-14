@@ -76,17 +76,18 @@ class BaixarConteudo():
                 print('Finalizado o Download')
                 print('===============================================================================================================================================================================')
                 legenda = self.driver.find_element_by_xpath('/html/body/div[1]/section/main/div/div/article/div[3]/div[1]/div/div[1]/div/span/span[1]').text
-                    
+                self.driver.close()
                 return legenda    
                     
                 
             except:
 
                 print('Video Detectado!!')
+                self.driver.close()
                 return
 
             
-        self.driver.close()
+        
     def DownloadImage(self, link):
 
         response = requests.get(link)
