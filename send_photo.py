@@ -3,26 +3,18 @@ import pickle
 import os
 from time import sleep as tm
 from webdriver_manager.chrome import ChromeDriverManager
-import emoji
 from selenium.webdriver.common.keys import Keys
 from pynput.keyboard import Key , Controller
 
 class Send():
 
-    def __init__(self):
+    def __init__(self,driver:webdriver):
         try:
             self.cookies = pickle.load(open('cookies.pkl','rb'))
         except:
             print('Login não ainda não foi feito')
             return
-
-        mobile_emulation = { "deviceName": "Nexus 5" }
-
-        chrome_options = webdriver.ChromeOptions()
-
-        chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
-
-        self.driver = webdriver.Chrome(chrome_options=chrome_options,executable_path=ChromeDriverManager().install())
+        self.driver = driver
      
     def send_photo(self,legenda):
 
@@ -80,5 +72,4 @@ class Send():
         
         tm(10)
         
-        self.driver.close()
-
+        

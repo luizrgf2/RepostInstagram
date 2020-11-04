@@ -9,25 +9,18 @@ from send_photo import Send
 
 class BaixarConteudo():
 
-    def __init__(self,link_perfil):
+    def __init__(self,link_perfil,driver:webdriver):
 
         self.link_atual = ''
 
         try:
             self.cookies = pickle.load(open('cookies.pkl','rb'))
         except:
-            print('Login não ainda não foi feito')
+            print('Login  ainda não foi feito')
             return
 
         self.link = link_perfil
-
-        mobile_emulation = { "deviceName": "Nexus 5" }
-
-        chrome_options = webdriver.ChromeOptions()
-
-        chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
-
-        self.driver = webdriver.Chrome(chrome_options=chrome_options,executable_path=ChromeDriverManager().install())
+        self.driver = driver
      
     
     def coletar_informacoes(self):
@@ -40,7 +33,7 @@ class BaixarConteudo():
         self.driver.get('https://www.instagram.com/')
 
         tm(3)
-        robo = Send()
+        
         
         self.driver.get(self.link)
 
@@ -76,14 +69,14 @@ class BaixarConteudo():
                 print('Finalizado o Download')
                 print('===============================================================================================================================================================================')
                 legenda = self.driver.find_element_by_xpath('/html/body/div[1]/section/main/div/div/article/div[3]/div[1]/div/div[1]/div/span/span[1]').text
-                self.driver.close()
+                
                 return legenda    
                     
                 
             except:
 
                 print('Video Detectado!!')
-                self.driver.close()
+                
                 return
 
             
